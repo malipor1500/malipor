@@ -1,31 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <link
-      rel="icon"
-      type="image/png"
-      href="https://cdn-icons-png.flaticon.com/512/3820/3820291.png"
-    />
-    <title>ReacTube</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>رزرو بلیط علیپور</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      direction: rtl;
+      font-family: sans-serif;
+      overflow: hidden;
+    }
 
-    <script>
-      if('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('./serviceWorker.js').then((reg) => {
-            console.log('Worker Registered')
-          }).catch((err) => {
-            console.log('Error in service worker registration.')
-          })
-        })
-      }
-    </script>
-  </body>
+    #loader {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #loader img {
+      width: 150px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: none;
+    }
+
+    .floating-buttons {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .floating-buttons a {
+      background-color: #25D366;
+      color: white;
+      padding: 12px 15px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background-color 0.3s;
+    }
+
+    .floating-buttons a.call {
+      background-color: #007bff;
+    }
+
+    .floating-buttons a:hover {
+      background-color: #128C7E;
+    }
+
+    .floating-buttons a.call:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- لودر -->
+  <div id="loader">
+    <img src="https://media.giphy.com/media/l3vR9O2qVnZL6E9sI/giphy.gif" alt="در حال بارگذاری...">
+  </div>
+
+  <!-- محتوای اصلی -->
+  <iframe id="mainFrame" src="https://09127923524.tourbin.net/#" allowfullscreen></iframe>
+
+  <!-- دکمه‌های شناور -->
+  <div class="floating-buttons">
+    <a href="https://wa.me/989127923524" target="_blank">
+      💬 چت در واتساپ
+    </a>
+    <a href="tel:+989127923524" class="call">
+      📞 تماس تلفنی
+    </a>
+  </div>
+
+  <script>
+    // وقتی iframe لود شد، لودر رو مخفی کن
+    const iframe = document.getElementById('mainFrame');
+    iframe.addEventListener('load', () => {
+      document.getElementById('loader').style.display = 'none';
+      iframe.style.display = 'block';
+    });
+  </script>
+
+</body>
 </html>
